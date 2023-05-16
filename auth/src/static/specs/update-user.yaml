@@ -1,0 +1,44 @@
+tags:
+  - User
+summary: Update user
+description: Update user
+operationId: api_v1_user_patch
+produces:
+  - "application/json"
+
+parameters:
+  - name: user_id
+    in: path
+    type: string
+    description: User UUID
+    required: true
+    default: 1f17c8cc-4cfe-4113-889f-220b973b79e5
+  - name: UserData
+    in: body
+    type: "string"
+    schema:
+      $ref: '#/definitions/UserInfo'
+
+responses:
+  200:
+    description: The user updated
+    schema:
+      $ref: '#/definitions/UserInfo'
+
+definitions:
+  UserInfo:
+    type: "object"
+    properties:
+      first_name:
+        type: "string"
+      last_name:
+        type: "string"
+      email:
+        type: "string"
+        format: email
+      password:
+        type: "string"
+      is_active:
+        type: "boolean"
+    xml:
+      name: "Update User"

@@ -1,0 +1,26 @@
+tags:
+  - Roles
+summary: Delete role
+description: Delete role
+operationId: api_v1_delete_role_delete
+produces:
+  - "application/json"
+
+responses:
+  204:
+    description: "Role deleted sucessfully"
+  401:
+    description: "Superuser required"
+  404:
+    description: "Role not found"
+  422:
+    description: "Bad Authorization header"
+
+parameters:
+  - name: uuid
+    in: path
+    type: string
+    required: true
+  - name: "Authorization"
+    in: header
+    required: true

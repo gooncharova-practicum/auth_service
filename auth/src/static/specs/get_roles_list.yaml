@@ -1,0 +1,37 @@
+tags:
+  - Roles
+summary: Get all roles
+description: Get roles list
+operationId: api_v1_roles_list_get
+produces:
+  - "application/json"
+
+parameters:
+  - name: "Authorization"
+    in: header
+    required: true
+
+responses:
+  200:
+    description: OK
+    schema:
+    type: array
+    items:
+      $ref: '#/definitions/RoleInfo'
+  401:
+    description: "Superuser required"
+  422:
+    description: "Bad Authorization header"
+
+definitions:
+  RoleInfo:
+    type: "object"
+    properties:
+      uuid:
+        type: "string"
+      name:
+        type: "string"
+      description:
+        type: "string"
+    xml:
+      name: "RoleInfo"

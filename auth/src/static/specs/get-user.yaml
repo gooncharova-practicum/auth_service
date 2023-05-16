@@ -1,0 +1,41 @@
+tags:
+  - User
+summary: Get user
+description: Get user info
+operationId: api_v1_user_get
+produces:
+  - "application/json"
+
+parameters:
+  - name: user_id
+    in: path
+    type: string
+    required: true
+    default: 1f17c8cc-4cfe-4113-889f-220b973b79e5
+
+responses:
+  200:
+    description: OK
+    schema:
+      $ref: '#/definitions/UserInfo'
+
+definitions:
+  UserInfo:
+    type: "object"
+    properties:
+      login:
+        type: "string"
+      first_name:
+        type: "string"
+      last_name:
+        type: "string"
+      email:
+        type: "string"
+        format: email
+      is_active:
+        type: "boolean"
+      is_deleted:
+        type: "boolean"
+        default: false
+      xml:
+        name: "Get User"

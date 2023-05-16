@@ -1,0 +1,40 @@
+tags:
+  - User
+summary: Get login history
+description: Get login history
+operationId: api_v1_user_list_get
+produces:
+  - "application/json"
+
+parameters:
+  - name: "Authorization"
+    in: header
+    required: true
+  - name: user_id
+    in: path
+    type: string
+    required: true
+    default: 1f17c8cc-4cfe-4113-889f-220b973b79e5
+
+responses:
+  200:
+    description: OK
+    schema:
+    type: array
+    items:
+      $ref: '#/definitions/LoginHistory'
+
+definitions:
+  LoginHistory:
+    type: "object"
+    properties:
+      device_type:
+        type: "string"
+      ip_address:
+        type: "string"
+      user_agent:
+        type: "string"
+      user_id:
+        type: "string"
+    xml:
+      name: "LoginHistory"

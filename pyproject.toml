@@ -1,0 +1,40 @@
+[project]
+name = "auth"
+version = "0.0.1"
+description = ""
+authors = []
+readme = "README.md"
+packages = [{include = "auth"}]
+
+[tool.dependencies]
+python = "^3.10"
+
+Flask = "==2.2.3"
+gevent = "==22.10.2"
+python-dotenv = "==1.0.0"
+gunicorn = "==20.1.0"
+pydantic = "==1.10.7"
+Flask-SQLAlchemy = "==3.0.3"
+psycopg2-binary = "==2.9.6"
+redis = "==4.5.4"
+
+[tool.group.dev.dependencies]
+black = "==23.1.0"
+ruff = "==0.0.261"
+pre-commit = "==3.2.2"
+mypy = "==1.2.0"
+
+[tool.ruff]
+extend-select = ["A", "B", "C4", "C90",
+    "I", "ISC", "N", "PTH", "S", "SIM",
+    "TCH", "T20", "Q", "W",]
+ignore = ["E40", "F40", "S101", "N805", "S105", "A003"]
+exclude = ["dockerfile", ".yaml"]
+show-fixes = true
+line-length = 100
+
+[tool.black]
+line-length = 100
+
+[tool.mypy]
+ignore_missing_imports = 'True'

@@ -1,0 +1,119 @@
+tags:
+  - Auth
+summary: Login
+description: User login
+operationId: api_v1_login_post
+produces:
+  - "application/json"
+
+parameters:
+  - name: User
+    in: body
+    schema:
+      $ref: '#/definitions/LoginUserRequest'
+    required: true
+
+responses:
+  200:
+    description: Successful Response
+    schema:
+      $ref: '#/definitions/LoginUserResponse'
+  400:
+    description: Validation Error
+    schema:
+      $ref: '#/definitions/HTTPValidationError'
+
+definitions:
+  LoginUserRequest:
+    title: LoginUserRequest
+    type: object
+    required:
+      - login
+      - password
+    properties:
+      login:
+        title: Login
+        type: string
+      password:
+        title: Password
+        type: string
+        format: password
+        writeOnly: true
+    description: Request for user login
+  LoginUserResponse:
+    title: LoginUserResponse
+    type: object
+    required:
+      - data
+    properties:
+      success:
+        title: Success
+        type: boolean
+        default: true
+      error:
+        title: Error
+        type: string
+        default: ''
+      data:
+        $ref: '#/definitions/LoginUserResData'
+    description: Response for user login
+  LoginUserResData:
+    title: LoginUserResData
+    type: object
+    required:
+      - access_token
+      - access_token_expiration_date
+      - refresh_token
+      - refresh_token_expiration_date
+    properties:
+      access_token:
+        title: Token
+        type: string
+      access_token_expiration_date:
+        title: Datetime
+        type: string
+        format: date-time
+      refresh_token:
+        title: Token
+        type: string
+      refresh_token_expiration_date:
+        title: Datetime
+        type: string
+        format: date-time
+        
+  HTTPValidationError:
+    title: HTTPValidationError
+    type: object
+    properties:
+      success:
+        title: success
+        type: boolean
+        default: false
+      error:
+        title: error
+        type: string
+        items:
+          $ref: '#/definitions/ValidationError'
+      data:
+        example: null
+  ValidationError:
+    title: ValidationError
+    type: object
+    required:
+      - loc
+      - msg
+      - type
+    properties:
+      loc:
+        title: Location
+        type: array
+        items:
+          anyOf:
+            - type: string
+            - type: integer
+      msg:
+        title: Message
+        type: string
+      type:
+        title: Error Type
+        type: string

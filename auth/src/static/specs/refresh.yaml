@@ -1,0 +1,108 @@
+tags:
+  - Auth
+summary: Refresh tokens
+description: Tokens update
+operationId: api_v1_refresh_post
+produces:
+  - "application/json"
+
+parameters:
+  - name: Token
+    in: body
+    schema:
+      $ref: '#/definitions/RefreshToken'
+    required: true
+  - name: "Authorization"
+    in: header
+    required: true
+  
+responses:
+  200:
+    description: Successful Response
+    schema:
+      $ref: '#/definitions/RefreshTokenResponse'
+  400:
+    description: Validation Error
+    schema:
+      $ref: '#/definitions/HTTPValidationError'
+
+definitions:
+  RefreshToken:
+    title: RefreshToken
+    type: object
+    required:
+      - user_id
+      - refresh_token
+    properties:
+      user_id:
+        title: User Id
+        type: string
+      refresh_token:
+        title: Refresh Token
+        type: string
+    description: Request for tokens refresh
+  RefreshTokenData:
+    title: RefreshTokenData
+    type: object
+    required:
+      - access_token
+      - refresh_token
+    properties:
+      refresh_token:
+        type: string
+      access_token:
+        type: string
+  RefreshTokenResponse:
+    title: RefreshTokenResponse
+    type: object
+    required:
+      - data
+    properties:
+      success:
+        title: Success
+        type: boolean
+        default: true
+      error:
+        title: Error
+        type: string
+        default: ''
+      data:
+        $ref: '#/definitions/RefreshTokenData'
+    description: Response for tokens refresh
+
+  HTTPValidationError:
+    title: HTTPValidationError
+    type: object
+    properties:
+      success:
+        title: success
+        type: boolean
+        default: false
+      error:
+        title: error
+        type: string
+        items:
+          $ref: '#/definitions/ValidationError'
+      data:
+        example: null
+  ValidationError:
+    title: ValidationError
+    type: object
+    required:
+      - loc
+      - msg
+      - type
+    properties:
+      loc:
+        title: Location
+        type: array
+        items:
+          anyOf:
+            - type: string
+            - type: integer
+      msg:
+        title: Message
+        type: string
+      type:
+        title: Error Type
+        type: string

@@ -1,0 +1,21 @@
+tags:
+  - User
+summary: Delete user
+description: Delete user
+operationId: api_v1_user_delete
+produces:
+  - "application/json"
+
+responses:
+  200:
+    description: "User deleted"
+  404:
+    description: "User not found!"
+
+parameters:
+  - name: user_id
+    in: path
+    type: string
+    description: User UUID
+    required: true
+    default: 1f17c8cc-4cfe-4113-889f-220b973b79e5

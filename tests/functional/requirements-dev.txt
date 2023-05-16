@@ -1,0 +1,5 @@
+-r requirements.txt
+black==23.1.0
+ruff==0.0.261
+pre-commit==3.2.2
+mypy==1.2.0

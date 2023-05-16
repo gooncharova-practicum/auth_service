@@ -1,0 +1,12 @@
+Dockerfile*
+.dockerignore
+.git
+.vscode
+.env
+*.pyc
+*.pyo
+*.mo
+*.db
+__pycache__
+.cache
+postgres

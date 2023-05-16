@@ -1,0 +1,47 @@
+tags:
+  - Roles
+summary: New role
+description: Create new role
+operationId: api_v1_roles_create_post
+produces:
+  - "application/json"
+
+parameters:
+  - name: name
+    in: body
+    type: string
+    required: true
+  - name: description
+    in: body
+    type: string
+    required: false
+  - name: "Authorization"
+    in: header
+    required: true
+
+responses:
+  201:
+    description: "Role created succesfully"
+    schema:
+      $ref: '#/definitions/RoleInfo'
+  400:
+    description: "Some exception"
+  409:
+    description: "Role already exist"
+  401:
+    description: "Superuser required"
+  422:
+    description: "Bad Authorization header"
+  
+definitions:
+  RoleInfo:
+    type: "object"
+    properties:
+      uuid:
+        type: "string"
+      name:
+        type: "string"
+      description:
+        type: "string"
+    xml:
+      name: "RoleInfo"
